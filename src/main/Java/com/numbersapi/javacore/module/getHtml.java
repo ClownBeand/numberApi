@@ -16,7 +16,8 @@ public class getHtml {
         URI uri = new URI(apiUrl);
         HttpURLConnection connection = (HttpURLConnection) uri.toURL().openConnection();
         connection.setRequestMethod("GET");
-
+        System.out.println("GET: " + uri);
+        
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(connection.getInputStream()));
 
