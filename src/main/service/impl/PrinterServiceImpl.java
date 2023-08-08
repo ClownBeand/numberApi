@@ -1,23 +1,22 @@
-package full.impl;
+package service.impl;
 
-import full.PrintLetterAndAverage;
+import service.PrinterService;
 
-import java.io.IOException;
 import java.util.*;
 
 import static utils.LoggerUtils.print;
 import static utils.LoggerUtils.printl;
 
-public class PrintMapAndService implements PrintLetterAndAverage {
+public class PrinterServiceImpl implements PrinterService {
     private double average;
     @Override
-    public void printMapFull(Map<String, Integer> map, String text) {
+    public void printAverageMap(Map<String, Integer> map, String text) {
         var treeMap = new TreeMap<>(map);
 
         printl(text);
         printl("\nЧастота:");
         printMap(treeMap);
-        printAverageMap(treeMap,text);
+        printAverage(treeMap,text);
         printSymbols(treeMap);
     }
 
@@ -26,7 +25,7 @@ public class PrintMapAndService implements PrintLetterAndAverage {
             printl("%s - %s", entry.getKey(), entry.getValue() );
         }
     }
-    private void printAverageMap(Map<String, Integer> map,String text) {
+    private void printAverage(Map<String, Integer> map,String text) {
         average = (double) text.length() / map.size();
         printl("\nСреднее значение: %s/%s = %s", text.length(), map.size(), average);
     }
@@ -50,10 +49,5 @@ public class PrintMapAndService implements PrintLetterAndAverage {
             char symChar = sym.charAt(0);
             print(sym + "(%s) ", (int) symChar );
         }
-    }
-
-    // работа с текстом которая не реализована .
-    private void printText(String text){
-        printl(text);
     }
 }

@@ -1,4 +1,4 @@
-package full.impl;
+package service.impl;
 
 // Класс для реализации своих исключений
 public class MyException extends Exception{

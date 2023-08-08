@@ -1,8 +1,8 @@
-package full.impl;
+package service.impl;
 
-import full.PrintLetterAndAverage;
-import full.TextProvider;
-import full.TextService;
+import service.PrinterService;
+import service.TextProvider;
+import service.TextService;
 
 import java.io.IOException;
 
@@ -10,27 +10,27 @@ import static utils.LoggerUtils.printl;
 import static utils.TextUtils.getMapChar;
 
 public class TextServiceImpl implements TextService {
-    private TextProvider textProvider;
-    private PrintLetterAndAverage printLetterAndAverage;
+    private final TextProvider textProvider;
+    private final PrinterService printerService;
 
     @Override
     public void count() throws MyException {
         var text = getText();
         var map = getMapChar(text);
-        printLetterAndAverage.printMapFull(map,text);
+        printerService.printAverageMap(map,text);
     }
 
-    public TextServiceImpl(TextProvider textProvider, PrintLetterAndAverage printLetterAndAverage) {
+    public TextServiceImpl(TextProvider textProvider, PrinterService printerService) {
         this.textProvider = textProvider;
-        this.printLetterAndAverage = printLetterAndAverage;
+        this.printerService = printerService;
     }
 
     private String getText() throws MyException {
         try {
             String readyUrl = textProvider.getContent();
 
-            if (readyUrl == "http://numbersapi.com//trivia") {
-                throw new MyException("Exceptio%sn: url не работает!");
+            if (readyUrl.equals("http://numbersapi.com//trivia")) {
+                throw new MyException("Exception: url не работает!");
             }
 
             return readyUrl;
